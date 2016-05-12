@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>ToDoアプリ</title>
+    <meta name="viewport" content="width=320,user-scalable=no" charset="utf-8" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
+</head>
+
+<body onload="load()">
+
+    <div data-role="page" data-theme="b">
+
+        <div data-role="header">
+            <h1>TODOリスト</h1>
+            <a rel="external" href="add_todo.html" data-role="button" data-icon="plus" data-transition="slide">追加</a>
+        </div>
+
+        <div data-role="content">
+
+            <ul data-role="listview" id="todo_list">
+            </ul>
+
+        </div>
+
+        <div data-role="footer">
+
+        </div>
+
+        <script>
+            function load() {
+
+                jQuery.noConflict();
+
+                //リストの反映
+                var text;
+                var date;
+
+                //現在の登録件数をlocalStorageから取得
+                var list_acount = localStorage['list_acount'];
+
+                if (list_acount == null) {
+                    list_acount = 0;
+                }
+
+                for (var i = list_acount - 1; i >= 0; i--) {
+
+                    text = localStorage['text' + i];
+                    date = localStorage['date' + i];
+
+                    jQuery('#todo_list').append('<li><h2>' + text + '</h2><p>' + date + '</p></li>');
+
+                }
+
+                jQuery('#todo_list').listview('refresh');
+
+            }
+        </script>
+
+    </div>
+
+</body>
+
+</html>

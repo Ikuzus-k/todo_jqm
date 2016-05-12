@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <title>ToDoアプリ</title>
+    <meta name="viewport" content="width=320,user-scalable=no" charset="utf-8" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.css" />
+    <script src="http://code.jquery.com/jquery-1.5.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.0a4/jquery.mobile-1.0a4.min.js"></script>
+</head>
+
+<body onload="load()">
+
+    <div data-role="page" data-theme="b">
+
+        <div data-role="header">
+            <h2>ToDoの追加</h2>
+            <a rel="external" href="index.html" data-role="button" data-icon="back" data-transition="slide">戻る</a>
+        </div>
+
+        <div data-role="content">
+
+            <div id="label">TODOを入力してください</div>
+            <div data-role="fieldcontain">
+                <input type="text" id="text" value="" />
+            </div>
+
+            <a rel="external" href="index.html" data-role="button" data-icon="check" data-transition="slide" onclick="set()">追加</a>
+
+        </div>
+
+        <div data-role="footer">
+
+        </div>
+
+        <script>
+            function set() {
+
+                jQuery.noConflict();
+
+                //現在の登録件数をlocalStorageから取得
+                var list_acount = localStorage['list_acount'];
+
+                if (list_acount == null) {
+                    list_acount = 0;
+                }
+
+                var set_text = jQuery('#text').val();
+                var set_date = new Date();
+
+                //send_textに何か書いてあればlocalStorageに追加する。
+                if (set_text.length > 0) {
+
+                    localStorage['text' + list_acount] = set_text;
+                    localStorage['date' + list_acount] = set_date;
+
+                    list_acount++;
+
+                }
+
+                localStorage['list_acount'] = list_acount;
+
+            }
+        </script>
+
+    </div>
+
+</body>
+
+</html>
